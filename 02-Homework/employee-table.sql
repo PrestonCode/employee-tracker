@@ -1,0 +1,8 @@
+DROP DATABASE IF EXISTS employees;
+CREATE DATABASE employees;
+
+USE employees;
+
+CREATE TABLE employees (
+	id INTEGER AUTO_INCREMENT NOT NULL
+);
