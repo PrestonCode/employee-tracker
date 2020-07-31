@@ -1,6 +1,9 @@
 const mysql = require("mysql")
 const inquirer = require("inquirer")
 
+const department = []
+const roles = []
+
 const connection = mysql.createConnection({
     host: "localhost",
 
@@ -9,7 +12,7 @@ const connection = mysql.createConnection({
     user: "root",
 
     password: "ENter$22",
-    database: ""
+    database: "employees"
 })
 
 connection.connect(function (err) {
@@ -38,7 +41,10 @@ const addItem = () => {
                                 name: "departmentName",
                                 message: "what is the name of the department?"
                             }
-                        ]).then
+                        ]).then(ans => {
+                            connection.query(`INSERT INTO department (name) VALUES (${ans})`)
+
+                        })
                     break;
                 case "Role":
                     inquirer
@@ -57,11 +63,11 @@ const addItem = () => {
                                 type: "list",
                                 name: "addRole",
                                 message: "what role do you want to add?",
-                                choices: ["Department", "Role", "Employee"]
+                                choices: 
                             },
                             {
                                 type: "input",
-                                name: "whatFName",
+                                name: "addFName",
                                 message: "what is there first name?",
                             },
                             {
@@ -69,11 +75,12 @@ const addItem = () => {
                                 name: "addLName",
                                 message: "what is there last name?",
                             }
+
                         ])
             }
             break;
-        }
-        }
+        })
+}
 
 
 inquirer
@@ -94,12 +101,7 @@ inquirer
 
                 break;
             case "Edit":
-                inquirer
-                    .prompt([
-                        {
 
-                        }
-                    ])
                 break;
 
             default:
